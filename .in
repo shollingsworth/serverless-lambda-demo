@@ -1,0 +1,2 @@
+source $HOME/.config/nvm/nvm.sh
+nvm use 16.14.2

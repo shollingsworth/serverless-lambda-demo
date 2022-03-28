@@ -1,0 +1,60 @@
+service: ${self:custom.prefix}-${opt:region}-${opt:stage}
+
+configValidationMode: error
+frameworkVersion: "2 || 3"
+package:
+  individually: false
+  patterns:
+    - "!**/*"
+    - main.py
+
+custom:
+  prefix: serverless-demo
+  serverless-offline:
+    host: 0.0.0.0
+    httpPort: 4000
+  pythonRequirements:
+    dockerizePip: false
+    pythonBin: ${opt:pythonBin, self:provider.runtime}
+
+provider:
+  name: aws
+  region: ${opt:region}
+  stage: ${opt:stage}
+  runtime: python3.9
+  stackName: ${self:custom.prefix}-${opt:region}-${opt:stage}
+  httpApi:
+    cors: true
+  timeout: 10
+  memorySize: 128
+  environment:
+    REGION: ${opt:region}
+    STAGE: ${opt:stage}
+    LOG_LEVEL: ${env:LOG_LEVEL, "INFO"}
+    PREFIX: ${self:custom.prefix}
+    NAMESPACE: ${self:custom.prefix}/${opt:stage}/${opt:region}
+
+plugins:
+  - serverless-offline
+  - serverless-python-requirements
+
+functions:
+  webapp:
+    handler: main.handler
+
+    events:
+      - httpApi:
+          method: "*"
+          path: "/{proxy+}"
+
+  ratehandler:
+    handler: main.rate
+    events:
+      # Invoke Lambda function every minute
+      - schedule: rate(1 minute)
+
+  cronhandler:
+    handler: main.cron
+    events:
+      # Invoke Lambda function every 2nd minute from Mon-Fri
+      - schedule: cron(0/2 * ? * MON-SUN *)

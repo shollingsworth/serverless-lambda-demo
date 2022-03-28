@@ -1,0 +1,17 @@
+{
+    "name": "serverless-demo",
+    "version": "1.0.0",
+    "scripts": {
+        "local": "serverless offline --region us-east-2 --stage testing",
+        "watch": "nodemon --watch '*.py' --watch serverless.yml -x 'yarn run local'",
+        "start": "npm run watch"
+    },
+    "dependencies": {
+        "nodemon": "^2.0.15",
+        "serverless": "^3.1.1",
+        "serverless-python-requirements": "^5.3.1"
+    },
+    "devDependencies": {
+        "serverless-offline": "8.5.0"
+    }
+}
