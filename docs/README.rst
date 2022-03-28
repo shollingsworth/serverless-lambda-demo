@@ -2,9 +2,7 @@
 Serverless Lambda Demo Documentation
 ############################################
 
-.. toctree:: 
-    :maxdepth: 2
-    :caption: Serverless Lambda Demo Documentation
+.. contents:: TOC
 
 Links
 ^^^^^
