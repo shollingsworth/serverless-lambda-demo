@@ -1,21 +1,3 @@
 fastapi
-PyYAML==5.4.1
-uvicorn
 mangum==0.12.4
-httpx
-boto3<2
-pytz
-boto3-stubs[essential,resourcegroupstaggingapi,sts,ce,pricing,kms,organizations,ec2,s3,cognito-idp,ssm]
-aioredis<2
-requests
-pynamodb==5.1.0
-PyJWT[crypto] >=1.0.0,<3
-python-jose[cryptography]
 aws-lambda-powertools[pydantic]
-gql==2.0.0
-arn==0.1.5
-deepdiff==5.6.0
-Jinja2==3.0.3
-redis==4.1.0
-walrus==0.8.2
-fastapi-cloudauth
